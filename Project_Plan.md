@@ -62,61 +62,61 @@ Step	Description
 ## Step-by-Step Guide
 
 1. Design & Initialize the GitHub Repo
-    
-    Create a new repository with the structure above.
-    Add a .gitignore for Terraform, Jenkins, and OS files.
+
+   Create a new repository with the structure above.
+   Add a .gitignore for Terraform, Jenkins, and OS files.
 
 2. Write Terraform Code
 
-    provider.tf: AWS provider configuration.
+   provider.tf: AWS provider configuration.
 
-    vpc.tf: Define VPC, public/private subnets (at least two AZs for HA), internet gateway, NAT gateway, and route tables.
+   vpc.tf: Define VPC, public/private subnets (at least two AZs for HA), internet gateway, NAT gateway, and route tables.
 
-    security_groups.tf:
+   security_groups.tf:
 
-    ALB: Allow HTTP/HTTPS from the internet.
+   ALB: Allow HTTP/HTTPS from the internet.
 
-    Web tier: Allow traffic from ALB only.
+   Web tier: Allow traffic from ALB only.
 
-    DB tier: Allow traffic from web tier only.
+   DB tier: Allow traffic from web tier only.
 
-    alb.tf: Create ALB in public subnets, target group, listener.
+   alb.tf: Create ALB in public subnets, target group, listener.
 
-    asg.tf: Launch template (with user data), Auto Scaling Group in public subnets, scaling policies.
+   asg.tf: Launch template (with user data), Auto Scaling Group in public subnets, scaling policies.
 
-    rds.tf: RDS instance in private subnets, subnet group, security group.
+   rds.tf: RDS instance in private subnets, subnet group, security group.
 
-    userdata.sh: Script to install and start your application on EC2 at boot.
+   userdata.sh: Script to install and start your application on EC2 at boot.
 
-    outputs.tf: Output ALB DNS, RDS endpoint, etc.
+   outputs.tf: Output ALB DNS, RDS endpoint, etc.
 
 3. Provision Jenkins
    Launch Jenkins (locally, on EC2, or managed).
 
-    Install plugins: Git, Pipeline, Terraform, AWS Credentials, etc.
+   Install plugins: Git, Pipeline, Terraform, AWS Credentials, etc.
 
-    Add AWS credentials as Jenkins secrets.
+   Add AWS credentials as Jenkins secrets.
 
 4. Configure Jenkins Pipeline
-    
-    Create a Jenkinsfile in your repo:
 
-    Clone repo
+   Create a Jenkinsfile in your repo:
 
-    Run terraform init, plan, apply
+   Clone repo
 
-    Optionally deploy app code if not handled by user data
+   Run terraform init, plan, apply
 
-    Configure a Jenkins job to use this pipeline.
+   Optionally deploy app code if not handled by user data
 
-    Set up a GitHub webhook to trigger the job on push.
+   Configure a Jenkins job to use this pipeline.
+
+   Set up a GitHub webhook to trigger the job on push.
 
 5. Pipeline Execution
-   
-    On code push, Jenkins pulls the latest code and runs the pipeline.
-    Terraform provisions or updates AWS infrastructure.
-    EC2 instances in the ASG run the user data script to install/start the application and connect to RDS.
-    The ALB routes traffic to healthy EC2 instances.
+
+   On code push, Jenkins pulls the latest code and runs the pipeline.
+   Terraform provisions or updates AWS infrastructure.
+   EC2 instances in the ASG run the user data script to install/start the application and connect to RDS.
+   The ALB routes traffic to healthy EC2 instances.
 
 6: Verification
 
