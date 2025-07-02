@@ -47,7 +47,7 @@ aws-ha-two-tier-terraform-jenkins/
 ---
 
 ## Project Workflow
-
+```
 Step	Description
 1	    Initialize Project & Repo Structure
 2	    Write & Commit Terraform Code (HCL) to GitHub
@@ -57,7 +57,7 @@ Step	Description
 6	    Pipeline Triggers Terraform to Deploy AWS Infra
 7	    Application is Deployed to EC2 via User Data or Pipeline
 8	    Verify Application via ALB and Database Connectivity
-
+```
 ---
 
 ## Step-by-Step Guide
