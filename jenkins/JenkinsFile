@@ -1,0 +1,39 @@
+pipeline {
+  agent any
+
+  environment {
+    DB_PASSWORD = credentials('jenkins.rds.db_password')
+  }
+
+  stages {
+    stage('Checkout') {
+      steps {
+        git 'https://github.com/your-org/aws-ha-two-tier-terraform-jenkins.git'
+      }
+    }
+
+    stage('Init Terraform') {
+      steps {
+        dir('terraform') {
+          sh 'terraform init'
+        }
+      }
+    }
+
+    stage('Plan Terraform') {
+      steps {
+        dir('terraform') {
+          sh "terraform plan -var=\"db_password=${DB_PASSWORD}\""
+        }
+      }
+    }
+
+    stage('Apply Terraform') {
+      steps {
+        dir('terraform') {
+          sh "terraform apply -auto-approve -var=\"db_password=${DB_PASSWORD}\""
+        }
+      }
+    }
+  }
+}
