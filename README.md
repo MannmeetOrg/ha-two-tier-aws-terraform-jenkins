@@ -22,7 +22,8 @@ Jenkins: Orchestrates infrastructure provisioning and application deployment
 ## 📦 Project Structure
 
 aws-ha-two-tier-terraform-jenkins/
-...
+```
+.
 ├── terraform/
 │   ├── main.tf                # Root module
 │   ├── variables.tf           # Input variables
@@ -41,7 +42,7 @@ aws-ha-two-tier-terraform-jenkins/
 │   └── index.html
 ├── README.md
 └── .gitignore
-...
+```
 
 ---
 
