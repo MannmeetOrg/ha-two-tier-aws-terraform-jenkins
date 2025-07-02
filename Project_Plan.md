@@ -33,10 +33,12 @@ aws-ha-two-tier-terraform-jenkins/
 │   ├── alb.tf                 # Application Load Balancer
 │   ├── asg.tf                 # Launch template, Auto Scaling Group
 │   ├── rds.tf                 # RDS instance and subnet group
+│   ├── ec2.tf                 # EC2 instances (for jenkins server)
 │   ├── userdata.sh            # EC2 user data (app install/start)
 ├── jenkins/
 │   ├── Jenkinsfile            # Jenkins pipeline as code
-│   └── scripts/               # Helper scripts (optional)
+│   ├── scripts/               # Helper scripts (optional)
+│   └── userdata.sh            # EC2 user data (app install/start)
 ├── app/                       # Sample web app (optional)
 │   └── index.html
 ├── README.md
