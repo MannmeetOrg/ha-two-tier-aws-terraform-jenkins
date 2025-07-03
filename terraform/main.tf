@@ -17,15 +17,15 @@ module "vpc" {
   azs             = ["us-east-1a", "us-east-1b"]
 }
 
-module "security_groups" {
-  source  = "../modules/security_groups"
+module "security-groups" {
+  source  = "../modules/security-groups"
   vpc_id  = module.vpc.vpc_id
 }
 
 module "alb" {
   source              = "../modules/alb"
   subnet_ids          = module.vpc.public_subnet_ids
-  security_group_ids  = [module.security_groups.alb_sg_id]
+  security_group_ids  = [module.security-groups.alb_sg_id]
 }
 
 module "asg" {
@@ -35,7 +35,7 @@ module "asg" {
   user_data_file      = file("../modules/asg/userdata.sh")
   key_name            = var.key_name
   subnet_ids          = module.vpc.app_subnets
-  security_group_ids  = [module.security_groups.asg_sg_id]
+  security_group_ids  = [module.security-groups.asg_sg_id]
 }
 
 module "rds" {
@@ -44,7 +44,7 @@ module "rds" {
   db_username         = var.db_username
   db_password         = var.db_password
   subnet_ids          = module.vpc.db_subnet_ids
-  security_group_ids  = [module.security_groups.rds_sg_id]
+  security_group_ids  = [module.security-groups.rds_sg_id]
 }
 module "bastion" {
   source              = "../modules/bastion"
