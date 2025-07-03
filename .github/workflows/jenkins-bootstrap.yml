@@ -22,7 +22,8 @@ jobs:
         uses: hashicorp/setup-terraform@v3
 
       - name: Initialize Terraform
-        run: terraform -chdir=terraform init
+        run: terraform init
+        working-directory: terraform/jenkins-server-only
 
       - name: Apply Terraform to launch Jenkins EC2
         run: |
