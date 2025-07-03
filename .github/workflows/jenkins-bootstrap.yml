@@ -28,7 +28,7 @@ jobs:
         run: |
           terraform -chdir=terraform apply -auto-approve \
             -var="key_name=${{ env.TF_VAR_key_name }}" \
-            -target=aws_instance.jenkins
+            -target=module.jenkins
 
       - name: Trigger Jenkins Job (Optional)
         run: |
