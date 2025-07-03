@@ -1,23 +1,23 @@
 module "vpc" {
-  source = "./"
+  source = ".."
 }
 
 module "alb" {
-  source = "./"
+  source = ".."
 }
 
 module "asg" {
-  source = "./"
+  source = ".."
 }
 
 module "rds" {
-  source = "./"
+  source = ".."
 }
 
 module "jenkins" {
-  source = "./"
+  source = ".."
 }
 
 module "bastion" {
-  source = "./"
+  source = ".."
 }
