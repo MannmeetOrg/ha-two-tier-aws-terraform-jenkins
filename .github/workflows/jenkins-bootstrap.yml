@@ -26,9 +26,10 @@ jobs:
 
       - name: Apply Terraform to launch Jenkins EC2
         run: |
-          terraform -chdir=terraform apply -auto-approve \
+          terraform apply -auto-approve \
             -var="key_name=${{ env.TF_VAR_key_name }}" \
             -target=module.jenkins
+        working-directory: terraform/jenkins-server-only
 
       - name: Trigger Jenkins Job (Optional)
         run: |
