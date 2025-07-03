@@ -1,10 +1,81 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>HA AWS App</title>
+    <meta charset="UTF-8" />
+    <title>High Availability on AWS</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 2rem; line-height: 1.6; }
+        header { text-align: center; margin-bottom: 2rem; }
+        h1 { color: #2c3e50; }
+        section { margin-bottom: 1.5rem; }
+        code { background: #f1f1f1; padding: 0.2rem 0.4rem; border-radius: 4px; }
+    </style>
 </head>
 <body>
-<h1>Welcome to Your High Availability Web App!</h1>
-<p>Deployed with Terraform, Jenkins & AWS</p>
+<header>
+    <h1>High Availability on AWS</h1>
+    <p>Deployed with Terraform &amp; Jenkins</p>
+</header>
+
+<section>
+    <h2>What is High Availability?</h2>
+    <p>
+        High Availability (HA) ensures your system remains operational with minimal downtime—even during failures. This is achieved by eliminating<br />
+        single points of failure and distributing components across multiple Availability Zones (AZs) :contentReference[oaicite:1]{index=1}.
+    </p>
+</section>
+
+<section>
+    <h2>Our Architecture</h2>
+    <ul>
+        <li>☁️ <strong>VPC</strong> with four tiers: Public, Web, App, and DB subnets in two AZs.</li>
+        <li>📡 <strong>Application Load Balancer (ALB)</strong> in public subnets, distributing incoming traffic.</li>
+        <li>📦 <strong>Auto Scaling Groups</strong> for web and app tiers—scaled across AZs.</li>
+        <li>🛢️ <strong>Multi-AZ RDS MySQL</strong> in private DB subnets.</li>
+        <li>🔒 <strong>Bastion host</strong> for secure SSH access to private subnets.</li>
+        <li>🤖 <strong>Jenkins</strong> running on an EC2 instance in a public subnet, provisioning everything via Terraform.</li>
+        <li>🔐 <strong>AWS Secrets Manager</strong> holds DB credentials securely, fetched by Jenkins at runtime.</li>
+    </ul>
+</section>
+
+<section>
+    <h2>How It Works</h2>
+    <ol>
+        <li>Traffic arrives at the ALB in public subnets.</li>
+        <li>Requests are forwarded to healthy web tier EC2 instances.</li>
+        <li>Web tier communicates with app tier instances in private subnets.</li>
+        <li>App tier connects to Multi-AZ RDS database securely.</li>
+        <li>Auto Scaling ensures failed instances are replaced automatically.</li>
+        <li>Using multiple AZs prevents failure from affecting availability.</li>
+    </ol>
+</section>
+
+<section>
+    <h2>CI/CD Pipeline</h2>
+    <p>
+        Jenkins is configured as a multi-branch pipeline. On git commits, it:
+    </p>
+    <ul>
+        <li>Pulls updated Terraform code</li>
+        <li>Fetches DB password from AWS Secrets Manager</li>
+        <li>Runs <code>terraform plan</code> and <code>terraform apply</code></li>
+        <li>Deploys updates to your architecture smoothly</li>
+    </ul>
+</section>
+
+<section>
+    <h2>Benefits of This Design</h2>
+    <ul>
+        <li><strong>Resilience:</strong> Workloads deployed across AZs reduce outage risk.</li>
+        <li><strong>Scalability:</strong> ASGs adapt to traffic, maintaining performance.</li>
+        <li><strong>Security:</strong> Secrets are never hard-coded; SSH only via Bastion.</li>
+        <li><strong>Disaster Recovery:</strong> Multi-AZ RDS ensures fast failover.</li>
+        <li><strong>Automation:</strong> Everything managed via IaC and CI tools.</li>
+    </ul>
+</section>
+
+<footer style="text-align: center; margin-top: 2rem;">
+    <p>&copy; 2025 Hosted via Terraform + Jenkins + AWS</p>
+</footer>
 </body>
 </html>
