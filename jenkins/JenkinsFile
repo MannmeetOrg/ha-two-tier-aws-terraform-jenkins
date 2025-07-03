@@ -8,31 +8,28 @@ pipeline {
   stages {
     stage('Checkout') {
       steps {
-        git 'https://github.com/your-org/aws-ha-two-tier-terraform-jenkins.git'
+        checkout scm
       }
     }
 
-    stage('Init Terraform') {
+    stage('Terraform Init') {
       steps {
-        dir('terraform') {
-          sh 'terraform init'
-        }
+        sh 'cd terraform && terraform init'
       }
     }
 
-    stage('Plan Terraform') {
+    stage('Terraform Plan') {
       steps {
-        dir('terraform') {
-          sh "terraform plan -var=\"db_password=${DB_PASSWORD}\""
-        }
+        sh 'cd terraform && terraform plan -var=\"db_password=${DB_PASSWORD}\" -var=\"key_name=your_key\"'
       }
     }
 
-    stage('Apply Terraform') {
+    stage('Terraform Apply') {
+      when {
+        branch 'main'
+      }
       steps {
-        dir('terraform') {
-          sh "terraform apply -auto-approve -var=\"db_password=${DB_PASSWORD}\""
-        }
+        sh 'cd terraform && terraform apply -auto-approve -var=\"db_password=${DB_PASSWORD}\" -var=\"key_name=your_key\"'
       }
     }
   }
