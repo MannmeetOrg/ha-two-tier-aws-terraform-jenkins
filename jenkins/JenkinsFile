@@ -1,35 +1,28 @@
 pipeline {
   agent any
-
   environment {
+    AWS_DEFAULT_REGION = 'us-east-1'
     DB_PASSWORD = credentials('jenkins.rds.db_password')
   }
-
   stages {
     stage('Checkout') {
       steps {
-        checkout scm
+        git url: 'https://github.com/MannmeetOrg/ha-two-tier-aws-terraform-jenkins.git', branch: 'main'
       }
     }
-
     stage('Terraform Init') {
       steps {
         sh 'cd terraform && terraform init'
       }
     }
-
     stage('Terraform Plan') {
       steps {
-        sh 'cd terraform && terraform plan -var=\"db_password=${DB_PASSWORD}\" -var=\"key_name=your_key\"'
+        sh 'cd terraform && terraform plan -var="db_password=${DB_PASSWORD}"'
       }
     }
-
     stage('Terraform Apply') {
-      when {
-        branch 'main'
-      }
       steps {
-        sh 'cd terraform && terraform apply -auto-approve -var=\"db_password=${DB_PASSWORD}\" -var=\"key_name=your_key\"'
+        sh 'cd terraform && terraform apply -auto-approve -var="db_password=${DB_PASSWORD}"'
       }
     }
   }
