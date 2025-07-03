@@ -1,5 +1,23 @@
+module "vpc" {
+  source = "./"
+}
+
+module "alb" {
+  source = "./"
+}
+
+module "asg" {
+  source = "./"
+}
+
 module "rds" {
-  source         = "./rds"
-  db_password    = var.db_password
-  # ...other variables
+  source = "./"
+}
+
+module "jenkins" {
+  source = "./"
+}
+
+module "bastion" {
+  source = "./"
 }

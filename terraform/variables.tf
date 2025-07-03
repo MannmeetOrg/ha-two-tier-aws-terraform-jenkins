@@ -7,37 +7,35 @@ variable "vpc_cidr" {
 }
 
 variable "public_subnets" {
-  type    = list(string)
-  default = ["10.10.1.0/24", "10.10.2.0/24"]
+  default = ["10.10.0.0/24", "10.10.1.0/24"]
+}
+
+variable "web_subnets" {
+  default = ["10.10.2.0/24", "10.10.3.0/24"]
 }
 
 variable "app_subnets" {
-  type    = list(string)
-  default = ["10.10.3.0/24", "10.10.4.0/24"]
+  default = ["10.10.4.0/24", "10.10.5.0/24"]
 }
 
 variable "db_subnets" {
-  type    = list(string)
-  default = ["10.10.5.0/24", "10.10.6.0/24"]
-}
-
-variable "instance_type" {
-  default = "t2.micro"
-}
-
-variable "db_password" {
-  description = "DB password retrieved from Jenkins"
-  type        = string
+  default = ["10.10.6.0/24", "10.10.7.0/24"]
 }
 
 variable "db_username" {
   default = "admin"
 }
 
+variable "db_password" {
+  description = "RDS MySQL password from Jenkins Secrets Manager"
+  type        = string
+}
+
 variable "db_name" {
   default = "appdb"
 }
+
 variable "key_name" {
-  description = "Name of the EC2 Key Pair"
+  description = "EC2 key pair"
   type        = string
 }
