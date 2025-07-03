@@ -28,7 +28,7 @@ jobs:
       - name: Apply Terraform to launch Jenkins EC2
         run: |
           terraform apply -auto-approve \
-            -var="key_name=${{ env.TF_VAR_key_name }}" \
+            -var="db_password=${{ env.DB_PASSWORD }}" \
             -target=module.jenkins
         working-directory: terraform/jenkins-server
 
