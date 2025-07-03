@@ -24,24 +24,49 @@ Jenkins: Orchestrates infrastructure provisioning and application deployment
 aws-ha-two-tier-terraform-jenkins/
 ```
 .
+├── modules/
+│   ├── jenkins/
+│   │   ├── main.tf                # Jenkins EC2 setup
+│   │   ├── variables.tf           # Inputs for Jenkins module
+│   │   └── outputs.tf             # Outputs (e.g., public IP)
+│   ├── vpc/
+│   │   ├── main.tf                # VPC, subnets, NAT
+│   │   ├── variables.tf
+│   │   └── outputs.tf
+│   ├── alb/
+│   │   ├── main.tf                # Application Load Balancer
+│   │   ├── variables.tf
+│   │   └── outputs.tf
+│   ├── asg/
+│   │   ├── main.tf                # Launch Template, Auto Scaling
+│   │   ├── variables.tf
+│   │   └── outputs.tf
+│   ├── rds/
+│   │   ├── main.tf                # RDS MySQL multi-AZ
+│   │   ├── variables.tf
+│   │   └── outputs.tf
+│   └── bastion/
+│       ├── main.tf                # Bastion host in public subnet
+│       ├── variables.tf
+│       └── outputs.tf
 ├── terraform/
-│   ├── main.tf                # Root module
-│   ├── variables.tf           # Input variables
-│   ├── outputs.tf             # Output values (ALB DNS, etc.)
-│   ├── provider.tf            # AWS provider config
-│   ├── vpc.tf                 # VPC, subnets, route tables
-│   ├── security_groups.tf     # Security groups for ALB, EC2, RDS
-│   ├── alb.tf                 # Application Load Balancer
-│   ├── asg.tf                 # Launch template, Auto Scaling Group
-│   ├── rds.tf                 # RDS instance and subnet group
-│   ├── userdata.sh            # EC2 user data (app install/start)
+│   ├── main.tf                    # Calls modules
+│   ├── provider.tf                # AWS provider config
+│   ├── variables.tf               # All root-level variables
+│   ├── outputs.tf                 # Final outputs (e.g., ALB DNS)
+│   └── backend.tf                 # Remote S3 backend config
 ├── jenkins/
-│   ├── Jenkinsfile            # Jenkins pipeline as code
-│   └── scripts/               # Helper scripts (optional)
-├── app/                       # Sample web app (optional)
-│   └── index.html
-├── README.md
-└── .gitignore
+│   ├── Jenkinsfile                # Multibranch pipeline for full infra
+│   └── bootstrap.sh              # EC2 user data script to install Jenkins
+├── .github/
+│   └── workflows/
+│       └── jenkins-bootstrap.yml  # GitHub Action: deploy only Jenkins module
+├── secrets/                      # (Optional) Placeholder for dev secrets
+├── docs/
+│   ├── architecture.png           # HA architecture diagram
+│   └── report.pdf                 # Project design report
+├── README.md                     # Project documentation
+└── .gitignore                    # Ignore Terraform artifacts and secrets
 ```
 
 ---
