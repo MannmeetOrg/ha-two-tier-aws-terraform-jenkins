@@ -4,7 +4,8 @@ variable "jenkins_ami_id" {}
 variable "jenkins_instance_type" { default = "t3.micro" }
 variable "jenkins_subnet_id" {}
 variable "jenkins_sg_id" {}
-variable "app_subnet_ids" {}
+variable "bastion_sg_id" {}
+
 
 variable "db_username" {
   description = "RDS DB admin username"
@@ -43,27 +44,15 @@ variable "cidr" {
 }
 
 variable "public_subnets" {
-  description = "List of public subnet CIDRs"
+  description = "List of public Web tier subnet CIDRs"
   type        = list(string)
   default     = ["10.10.0.0/24", "10.10.1.0/24"]
 }
 
-variable "web_subnets" {
-  description = "List of web tier subnet CIDRs"
+variable "private_subnets" {
+  description = "List of private tier subnet CIDRs"
   type        = list(string)
   default     = ["10.10.2.0/24", "10.10.3.0/24"]
-}
-
-variable "app_subnets" {
-  description = "List of application subnet CIDRs"
-  type        = list(string)
-  default     = ["10.10.4.0/24", "10.10.5.0/24"]
-}
-
-variable "db_subnets" {
-  description = "List of database subnet CIDRs"
-  type        = list(string)
-  default     = ["10.10.6.0/24", "10.10.7.0/24"]
 }
 
 variable "azs" {
