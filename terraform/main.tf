@@ -21,7 +21,7 @@ module "bastion" {
   instance_type       = "t2.micro"
   key_name            = "my-key"
   subnet_id           = module.vpc.public_subnet_ids[0]
-  security_group_ids  = [var.bastion_sg_id]
+  security_group_ids  = [module.security_groups.bastion_sg_id]
 }
 
 module "alb" {
