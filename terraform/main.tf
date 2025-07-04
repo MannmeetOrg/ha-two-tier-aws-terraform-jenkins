@@ -3,7 +3,7 @@ module "jenkins" {
   ami_id              = var.jenkins_ami_id
   instance_type       = var.jenkins_instance_type
   subnet_id           = var.jenkins_subnet_id
-  key_name            = var.key_name
+  key_name            = var.jenkins_key_pair
   security_group_id   = var.jenkins_sg_id
 }
 

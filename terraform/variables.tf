@@ -1,9 +1,17 @@
 variable "aws_region" { default = "us-east-1" }
 variable "aws_profile" { default = "default" }
-variable "jenkins_ami_id" {}
-variable "jenkins_instance_type" { default = "t3.micro" }
+variable "jenkins_ami_id" {
+  description = "Jenkins AMI ID"
+  type        = string
+  default     = "ami-05ffe3c48a9991133"
+}
+variable "jenkins_instance_type" {
+  default = "t3.micro" }
 variable "jenkins_subnet_id" {}
 variable "jenkins_sg_id" {}
+variable "jenkins_key_pair" {
+  default     = "aws-key-pair"
+}
 
 
 variable "db_username" {
@@ -21,13 +29,12 @@ variable "db_password" {
 variable "ami_id" {
   description = "AMI ID to use for EC2 instances"
   type        = string
-  default     = "ami-0c02fb55956c7d316"
+  default     = "ami-05ffe3c48a9991133"
 }
 
 variable "key_name" {
   description = "Key pair name for SSH access"
   type        = string
-  default     = "my-key"
 }
 
 variable "instance_type" {
