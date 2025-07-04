@@ -5,7 +5,7 @@ resource "aws_instance" "jenkins" {
   associate_public_ip_address = true
   key_name                    = var.key_name
   vpc_security_group_ids = [var.security_group_id]
-  user_data = file("${path.module}/../jenkins/bootstrap.sh")
+  user_data = file("${path.module}/jenkins/bootstrap.sh")
 
   tags = {
     Name = "jenkins-server"

@@ -5,8 +5,6 @@ module "jenkins" {
   subnet_id           = var.jenkins_subnet_id
   key_name            = var.key_name
   security_group_id   = var.jenkins_sg_id
-  user_data_file      = file("../modules/jenkins/bootstrap.sh")
-
 }
 
 module "vpc" {
