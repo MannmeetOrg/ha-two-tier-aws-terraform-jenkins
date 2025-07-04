@@ -4,7 +4,7 @@ variable "jenkins_ami_id" {}
 variable "jenkins_instance_type" { default = "t3.micro" }
 variable "jenkins_subnet_id" {}
 variable "jenkins_sg_id" {}
-variable "bastion_sg_id" {}
+
 
 variable "db_username" {
   description = "RDS DB admin username"
