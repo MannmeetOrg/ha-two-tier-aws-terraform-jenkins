@@ -3,6 +3,5 @@ terraform {
     bucket = "terraform-state-twotieraws"
     key    = "jenkins/terraform.tfstate"
     region = "us-east-1"
-    encrypt = true
   }
 }
