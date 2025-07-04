@@ -27,7 +27,6 @@ jobs:
         run: terraform validate
 
       - name: Terraform Apply - Jenkins Module
-        needs: terraform validate
         working-directory: ./terraform
         run: terraform apply -auto-approve -target=module.jenkins
         env:
