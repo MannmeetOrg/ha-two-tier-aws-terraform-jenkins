@@ -24,10 +24,14 @@ module "bastion" {
   security_group_ids  = [var.bastion_sg_id.id]
 }
 
-module "security-groups"
-{
+module "security-groups" {
   source = "../modules/security-groups"
-  vpc_id = module.vpc.vpc_id
+
+  vpc_id     = module.vpc.vpc_id
+
+  alb_ports  = [80, 443]       # Public traffic to ALB (HTTP, HTTPS)
+  asg_ports  = [80, 22]        # Internal traffic to EC2 instances, plus SSH if needed
+  rds_ports  = [3306]          # MySQL access from app tier
 }
 
 module "alb" {
