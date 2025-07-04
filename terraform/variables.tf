@@ -6,7 +6,6 @@ variable "jenkins_subnet_id" {}
 variable "jenkins_sg_id" {}
 variable "bastion_sg_id" {}
 
-
 variable "db_username" {
   description = "RDS DB admin username"
   type        = string

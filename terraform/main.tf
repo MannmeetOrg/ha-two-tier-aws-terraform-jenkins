@@ -24,7 +24,8 @@ module "bastion" {
   security_group_ids  = [var.bastion_sg_id.id]
 }
 
-module "security-groups" {
+module "security-groups"
+{
   source = "../modules/security-groups"
   vpc_id = module.vpc.vpc_id
 }
