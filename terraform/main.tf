@@ -54,10 +54,3 @@ module "rds" {
   security_group_ids  = [module.security_groups.rds_sg_id]
 }
 
-module "bastion" {
-  source              = "../modules/bastion"
-  ami_id              = var.ami_id
-  key_name            = var.key_name
-  subnet_id           = element(module.vpc.public_subnet_ids, 0)
-  security_group_id   = module.security_groups.bastion_sg_id
-}
