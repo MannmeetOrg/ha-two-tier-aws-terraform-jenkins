@@ -1,10 +1,7 @@
 name: Jenkins EC2 Bootstrap
 
 on:
-  push:
-    paths:
-      - '.github/workflows/jenkins-bootstrap.yml'
-      - 'terraform/**'
+  workflow_dispatch:
 
 jobs:
   jenkins-bootstrap:
