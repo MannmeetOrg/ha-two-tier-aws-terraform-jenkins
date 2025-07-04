@@ -7,11 +7,13 @@ sudo yum upgrade -y
 sudo yum install -y jenkins git unzip
 sudo systemctl enable jenkins
 sudo systemctl start jenkins
-sudo yum install -y docker
-sudo systemctl enable docker
-sudo systemctl start docker
-sudo usermod -aG docker jenkins
-sudo curl -O https://releases.hashicorp.com/terraform/1.6.2/terraform_1.6.2_linux_amd64.zip
-sudo unzip terraform_1.6.2_linux_amd64.zip -d /usr/local/bin
-sudo yum install -y python3-pip
-pip3 install awscli --upgrade
+
+# Install Terraform
+wget https://releases.hashicorp.com/terraform/1.8.0/terraform_1.8.0_linux_amd64.zip
+unzip terraform_1.8.0_linux_amd64.zip
+mv terraform /usr/local/bin/
+
+# AWS CLI
+curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+unzip awscliv2.zip && sudo ./aws/install
+
