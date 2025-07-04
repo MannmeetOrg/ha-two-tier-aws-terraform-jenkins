@@ -17,15 +17,17 @@ jobs:
         uses: hashicorp/setup-terraform@v2
         with:
           terraform_version: 1.6.2
-      - name: Terraform Validate
-        working-directory: ./terraform
-        run: terraform validate
 
       - name: Terraform Init
         working-directory: ./terraform
         run: terraform init
 
+      - name: Terraform Validate
+        working-directory: ./terraform
+        run: terraform validate
+
       - name: Terraform Apply - Jenkins Module
+        needs: terraform validate
         working-directory: ./terraform
         run: terraform apply -auto-approve -target=module.jenkins
         env:
