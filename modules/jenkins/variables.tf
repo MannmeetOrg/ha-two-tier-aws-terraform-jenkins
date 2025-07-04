@@ -13,7 +13,6 @@ variable "instance_type" {
 variable "subnet_id" {
   type        = string
   description = "Subnet ID for Jenkins EC2"
-  default     = var.subnet_id
 }
 
 variable "key_name" {
