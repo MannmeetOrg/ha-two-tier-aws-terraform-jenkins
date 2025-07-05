@@ -52,7 +52,7 @@ module "security_groups" {
 }
 
 module "jenkins" {
-  source = "../modules/jenkins"
+  source = "../../deploy_jenkins_server/modules/jenkins"
   jenkins_ami_id        = module.jenkins.jenkins_ami_id
   jenkins_instance_type = module.jenkins.jenkins_instance_type
   jenkins_subnet_id     = module.vpc.public_subnet_ids[0]
