@@ -2,6 +2,10 @@ output "jenkins_public_ip" {
   value = aws_instance.jenkins.public_ip
 }
 
+output "jenkins_instance_type" {
+  value = aws_instance.jenkins.instance_type
+}
+
 output "jenkins_ami_id" {
   value = aws_instance.jenkins.id
 }

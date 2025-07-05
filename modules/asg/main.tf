@@ -13,10 +13,12 @@ resource "aws_autoscaling_group" "app" {
   max_size             = 4
   min_size             = 1
   vpc_zone_identifier  = var.subnet_ids
+
   launch_template {
     id      = aws_launch_template.app.id
     version = "$Latest"
   }
+
   tag {
     key                 = "Name"
     value               = "app-asg"
