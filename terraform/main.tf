@@ -57,6 +57,5 @@ module "jenkins" {
   jenkins_instance_type = var.jenkins_instance_type
   jenkins_subnet_id     = module.vpc.public_subnet_ids[0]
   jenkins_sg_id         = module.security_groups.jenkins_sg_id
-  jenkins_user_data     = file("userdata_jenkins.sh")
   jenkins_key_pair      = var.jenkins_key_pair
 }

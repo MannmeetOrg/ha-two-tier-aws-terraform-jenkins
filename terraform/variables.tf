@@ -6,6 +6,16 @@ variable "db_username" {
   type        = string
 }
 
+variable "jenkins_instance_type" {
+  description = "jenkins_instance_type"
+  type        = string
+}
+
+variable "jenkins_key_pair" {
+  description = "Key pair name for Jenkins server"
+  type        = string
+}
+
 variable "db_password" {
   description = "Database password"
   type        = string
