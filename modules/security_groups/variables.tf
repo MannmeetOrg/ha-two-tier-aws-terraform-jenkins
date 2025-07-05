@@ -22,3 +22,7 @@ variable "rds_ports" {
   default     = [3306]
 }
 
+variable "jenkins_sg" {
+  description = "Security group ID for Jenkins server"
+  type        = string
+}

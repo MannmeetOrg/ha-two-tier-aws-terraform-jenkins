@@ -1,52 +1,35 @@
 variable "aws_region" { default = "us-east-1" }
 variable "aws_profile" { default = "default" }
-variable "jenkins_ami_id" {
-  description = "Jenkins AMI ID"
-  type        = string
-  default     = "ami-05ffe3c48a9991133"
-}
-variable "jenkins_instance_type" {
-  default = "t3.micro" }
-variable "jenkins_subnet_id" {}
-variable "jenkins_sg_id" {}
-variable "jenkins_key_pair" {
-  default     = "aws-key-pair"
-}
-
 
 variable "db_username" {
-  description = "RDS DB admin username"
+  description = "Database username"
   type        = string
-  default     = "admin"
 }
 
 variable "db_password" {
-  description = "RDS DB password"
+  description = "Database password"
   type        = string
   sensitive   = true
 }
 
 variable "ami_id" {
-  description = "AMI ID to use for EC2 instances"
+  description = "AMI ID for EC2"
   type        = string
-  default     = "ami-05ffe3c48a9991133"
 }
 
 variable "key_name" {
-  description = "Key pair name for SSH access"
+  description = "SSH key name"
   type        = string
 }
 
 variable "instance_type" {
-  description = "EC2 instance type"
+  description = "Instance type for general EC2 instances"
   type        = string
-  default     = "t2.micro"
 }
 
 variable "cidr" {
   description = "VPC CIDR block"
   type        = string
-  default     = "10.10.0.0/16"
 }
 
 variable "public_subnets" {

@@ -1,11 +1,3 @@
-module "jenkins" {
-  source              = "../modules/jenkins"
-  ami_id              = var.jenkins_ami_id
-  instance_type       = var.jenkins_instance_type
-  subnet_id           = var.jenkins_subnet_id
-  key_name            = var.jenkins_key_pair
-  security_group_id   = var.jenkins_sg_id
-}
 
 module "vpc" {
   source          = "../modules/vpc"
@@ -57,4 +49,14 @@ module "security_groups" {
   # alb_ports  = [80, 443]       # Public traffic to ALB (HTTP, HTTPS)
   # asg_ports  = [80, 22]        # Internal traffic to EC2 instances, plus SSH if needed
   # rds_ports  = [3306]          # MySQL access from app tier
+}
+
+module "jenkins" {
+  source = "../modules/jenkins"
+
+  jenkins_instance_type = var.jenkins_instance_type
+  jenkins_subnet_id     = module.vpc.public_subnet_ids[0]
+  jenkins_sg_id         = module.security_groups.jenkins_sg_id
+  jenkins_user_data     = file("userdata_jenkins.sh")
+  jenkins_key_pair      = var.jenkins_key_pair
 }
