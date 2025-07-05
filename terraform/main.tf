@@ -51,10 +51,3 @@ module "security_groups" {
   # rds_ports  = [3306]          # MySQL access from app tier
 }
 
-module "jenkins" {
-  source = "../../deploy_jenkins_server/modules/jenkins"
-  jenkins_ami_id        = module.jenkins.jenkins_ami_id
-  jenkins_instance_type = module.jenkins.jenkins_instance_type
-  jenkins_subnet_id     = module.vpc.public_subnet_ids[0]
-  jenkins_sg_id         = module.security_groups.jenkins_sg_id
-  jenkins_key_pair      = module.jenkins.jenkins_key_pair
